@@ -28,8 +28,10 @@ def main
             puts "相手は#{opponentHoiStr}を向いています。"
             if myselfHoiStr == opponentHoiStr
                 puts "あっち向いてホイ結果：あなたの勝ち"
+                isHoiDraw = false
             else
-                puts "あっち向いてホイ結果：相手の勝ち"
+                puts "あっち向いてホイ結果：引き分け"
+                isHoiDraw = true
             end
             puts "--------------------"
 
@@ -44,17 +46,22 @@ def main
             puts "あなたは#{myselfHoiStr}を向きました。"
             puts "相手は#{opponentHoiStr}を指しています。"
             if myselfHoiStr != opponentHoiStr
-                puts "あっち向いてホイ結果：あなたの勝ち"
+                puts "あっち向いてホイ結果：引き分け"
+                isHoiDraw = true
             else
                 puts "あっち向いてホイ結果：相手の勝ち"
+                isHoiDraw = false
             end
         else
             puts "あいこです。"
-            main()
+            isHoiDraw = main()
         end
     else
         puts "棄権しました。\nアプリを終了します。"
+        isHoiDraw = false
     end
+
+    return isHoiDraw
 end
 #1-2 じゃんけん入力処理メソッド
 def set_janken_status
@@ -151,4 +158,8 @@ end
 
 #メイン処理
 puts "これはじゃんけんアプリです"
-main()
+isHoiDraw = main()
+
+while isHoiDraw != false
+    isHoiDraw = main()
+end
